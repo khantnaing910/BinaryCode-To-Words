@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Code Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Binary Rain Background Effect -->
+    <div class="binary-rain" id="binaryRain" aria-hidden="true"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">01</span>
+                <div class="logo-text">
+                    <h1>Binary Code Converter</h1>
+                    <p class="subtitle">Convert text to binary and binary to text instantly</p>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Converters Grid -->
+            <div class="converters-grid">
+                
+                <!-- Text to Binary Section -->
+                <section class="converter-card" id="textToBinarySection">
+                    <div class="card-header">
+                        <h2>
+                            <span class="card-icon">📝</span>
+                            Text to Binary
+                        </h2>
+                        <div class="realtime-toggle">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="realtimeText" aria-label="Enable real-time conversion">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Real-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="textInput">Enter your text:</label>
+                        <textarea 
+                            id="textInput" 
+                            class="input-textarea" 
+                            placeholder="Enter your text here... (e.g., Hello World)"
+                            rows="4"
+                            aria-describedby="textCharCount"
+                        ></textarea>
+                        <div class="input-info">
+                            <span id="textCharCount" class="char-count">0 characters</span>
+                            <button class="clear-btn" id="clearTextInput" aria-label="Clear text input">
+                                ✕ Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="convert-btn" id="convertTextBtn">
+                        <span class="btn-icon">⚡</span>
+                        Convert to Binary
+                    </button>
+                    
+                    <div class="output-group" id="textOutputGroup">
+                        <label>Binary Output:</label>
+                        <div class="output-display" id="binaryOutput" aria-live="polite">
+                            <span class="placeholder-text">Binary code will appear here...</span>
+                        </div>
+                        <div class="output-info">
+                            <span id="binaryBitCount" class="bit-count">0 bits</span>
+                        </div>
+                        
+                        <!-- Breakdown Table -->
+                        <div class="breakdown-section">
+                            <button class="breakdown-toggle" id="textBreakdownToggle" aria-expanded="false">
+                                <span class="toggle-arrow">▶</span>
+                                Show Conversion Breakdown
+                            </button>
+                            <div class="breakdown-content" id="textBreakdownContent" hidden>
+                                <table class="breakdown-table" id="textBreakdownTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Character</th>
+                                            <th>ASCII Value</th>
+                                            <th>Binary Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="action-btn copy-btn" id="copyBinaryBtn" disabled>
+                                <span class="btn-icon">📋</span>
+                                Copy
+                            </button>
+                            <button class="action-btn download-btn" id="downloadTextJsonBtn" disabled>
+                                <span class="btn-icon">💾</span>
+                                Download JSON
+                            </button>
+                            <button class="action-btn reset-btn" id="resetTextSection" disabled>
+                                <span class="btn-icon">🔄</span>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Binary to Text Section -->
+                <section class="converter-card" id="binaryToTextSection">
+                    <div class="card-header">
+                        <h2>
+                            <span class="card-icon">🔢</span>
+                            Binary to Text
+                        </h2>
+                        <div class="realtime-toggle">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="realtimeBinary" aria-label="Enable real-time conversion">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Real-time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="binaryInput">Enter binary code:</label>
+                        <textarea 
+                            id="binaryInput" 
+                            class="input-textarea binary-input" 
+                            placeholder="Enter binary code... (e.g., 01001000 01101001)"
+                            rows="4"
+                            aria-describedby="binaryInputInfo"
+                        ></textarea>
+                        <div class="input-info">
+                            <span id="binaryInputCount" class="char-count">0 bits</span>
+                            <button class="clear-btn" id="clearBinaryInput" aria-label="Clear binary input">
+                                ✕ Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="format-selector">
+                        <label for="formatSelect">Input Format:</label>
+                        <select id="formatSelect" class="format-dropdown">
+                            <option value="auto">Auto-detect</option>
+                            <option value="space">Space-separated</option>
+                            <option value="continuous">Continuous</option>
+                            <option value="comma">Comma-separated</option>
+                        </select>
+                    </div>
+                    
+                    <button class="convert-btn" id="convertBinaryBtn">
+                        <span class="btn-icon">⚡</span>
+                        Convert to Text
+                    </button>
+                    
+                    <div class="output-group" id="binaryOutputGroup">
+                        <label>Text Output:</label>
+                        <div class="output-display text-output" id="textOutput" aria-live="polite">
+                            <span class="placeholder-text">Decoded text will appear here...</span>
+                        </div>
+                        <div class="output-info">
+                            <span id="textOutputCharCount" class="char-count">0 characters</span>
+                        </div>
+                        
+                        <!-- Breakdown Table -->
+                        <div class="breakdown-section">
+                            <button class="breakdown-toggle" id="binaryBreakdownToggle" aria-expanded="false">
+                                <span class="toggle-arrow">▶</span>
+                                Show Conversion Breakdown
+                            </button>
+                            <div class="breakdown-content" id="binaryBreakdownContent" hidden>
+                                <table class="breakdown-table" id="binaryBreakdownTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Binary Code</th>
+                                            <th>ASCII Value</th>
+                                            <th>Character</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="action-btn copy-btn" id="copyTextBtn" disabled>
+                                <span class="btn-icon">📋</span>
+                                Copy
+                            </button>
+                            <button class="action-btn download-btn" id="downloadBinaryJsonBtn" disabled>
+                                <span class="btn-icon">💾</span>
+                                Download JSON
+                            </button>
+                            <button class="action-btn reset-btn" id="resetBinarySection" disabled>
+                                <span class="btn-icon">🔄</span>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <h2>
+                    <span class="card-icon">📤</span>
+                    Upload JSON File
+                </h2>
+                <div 
+                    class="upload-zone" 
+                    id="uploadZone"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Upload JSON file. Drag and drop or click to browse."
+                >
+                    <div class="upload-icon">📁</div>
+                    <p class="upload-text">Drag & drop your JSON file here</p>
+                    <p class="upload-subtext">or click to browse</p>
+                    <span class="file-type-badge">.json only</span>
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        accept=".json,application/json" 
+                        hidden
+                        aria-label="Select JSON file"
+                    >
+                </div>
+                <div class="upload-status" id="uploadStatus" aria-live="polite"></div>
+            </section>
+
+            <!-- ASCII Reference Section -->
+            <section class="reference-section">
+                <button class="reference-toggle" id="asciiRefToggle" aria-expanded="false">
+                    <span class="toggle-arrow">▶</span>
+                    ASCII Reference Table
+                </button>
+                <div class="reference-content" id="asciiRefContent" hidden>
+                    <div class="reference-grid" id="asciiGrid"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="instructions">
+                    <h3>Quick Guide</h3>
+                    <ul>
+                        <li><strong>Text → Binary:</strong> Enter any text and click convert</li>
+                        <li><strong>Binary → Text:</strong> Enter 8-bit binary codes (space, comma, or continuous)</li>
+                        <li><strong>Download:</strong> Save your conversion as a JSON file</li>
+                        <li><strong>Upload:</strong> Load a previously saved JSON conversion</li>
+                    </ul>
+                </div>
+                <div class="shortcuts">
+                    <h3>Keyboard Shortcuts</h3>
+                    <ul>
+                        <li><kbd>Ctrl</kbd> + <kbd>Enter</kbd> - Convert</li>
+                        <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> - Copy result</li>
+                        <li><kbd>Escape</kbd> - Clear input</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Binary Code Converter © 2024 | Made with 💙</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
