@@ -7,7 +7,7 @@ A simple, elegant web tool to convert text to binary code and binary code back t
 [![Live Demo](https://img.shields.io/badge/Live-Demo-00d9ff?style=for-the-badge)](https://yourusername.github.io/binary-code-converter)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-![Preview](https://via.placeholder.com/800x400/1a1a2e/00d9ff?text=Binary+Code+Converter)
+![Preview]([https://via.placeholder.com/800x400/1a1a2e/00d9ff?text=Binary+Code+Converter](https://khantnaing910.github.io/BinaryCode-To-Words/))
 
 </div>
 
