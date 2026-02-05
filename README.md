@@ -81,6 +81,6 @@ MIT License - Free to use and modify.
 
 **[Try it Live](#)** · **[Report Bug](../../issues)** · **[Request Feature](../../issues)**
 
-Made with ❤️
+Made with Logic
 
 </div>
